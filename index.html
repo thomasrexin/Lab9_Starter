@@ -87,6 +87,14 @@
     </section>
   </main>
 
+  <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+  <script>
+    window.TrackJS && TrackJS.install({ 
+      token: "3758573f7b3144628759cf68824de597"
+      // for more configuration options, see https://docs.trackjs.com
+    });
+  </script>
+                        
   <script>
     let form = document.querySelector('form');
     form.addEventListener('submit', e => {
@@ -102,6 +110,103 @@
 
     // Start your code here
     // You may move this JS to another file if you wish
+    class AnotherError extends Error {
+      constructor(message) {
+        super(message); // (1)
+        this.name = "AnotherError"; // (2)
+      }
+    }
+
+    errorBtns[0].addEventListener('click', () => {
+      console.log('Console Log Demo');
+    });
+
+    errorBtns[1].addEventListener('click', () => {
+      console.error('Console Error Demo');
+    });
+
+    errorBtns[2].addEventListener('click', () => {
+      console.count('Console Count Demo');
+    });
+
+    errorBtns[3].addEventListener('click', () => {
+      console.warn('Console Warning Demo');
+    });
+
+    errorBtns[4].addEventListener('click', () => {
+      let x = 1;
+      let y = 2;
+      let errorMessage = '1 does not equal 2';
+      console.assert(x == y, {x, y, errorMessage});
+    });
+
+    errorBtns[5].addEventListener('click', () => {
+      console.clear();
+    });
+
+    errorBtns[6].addEventListener('click', () => {
+      console.dir(errorBtns[6]);
+    });
+
+    errorBtns[7].addEventListener('click', () => {
+      console.dirxml(errorBtns[6]);
+    });
+
+    errorBtns[8].addEventListener('click', () => {
+      console.group();
+    });
+
+    errorBtns[9].addEventListener('click', () => {
+      console.groupEnd('console.group');
+    });
+
+    errorBtns[10].addEventListener('click', () => {
+      var cities = [
+      {
+        city: 'Sacramento',
+        state: 'California',
+      },
+      {
+        city: 'Seattle',
+        state: 'Washington',
+      },
+      {
+        city: 'Atlanta',
+        state: 'Georgia',
+      }
+      ];
+      try {
+        console.table(cities);
+      } catch (err) {
+        throw new AnotherError('An error has occurred');
+      } finally {
+        console.log(cities);
+      }
+    });
+
+    errorBtns[11].addEventListener('click', () => {
+      console.time();
+    });
+
+    errorBtns[12].addEventListener('click', () => {
+      console.timeEnd();
+    });
+
+    errorBtns[13].addEventListener('click', () => {
+      const deep = () => { deeper(); };
+      const deeper = () => { deepest(); };
+      const deepest = () => { buttonClick(); };
+      const buttonClick = () => { console.trace(); };
+      deep();
+    });
+
+    errorBtns[14].addEventListener('click', () => {
+      error();
+    });
+
+    window.addEventListener('error', () => {
+      throw new AnotherError('Another error message');
+    });
   </script>
 </body>
 
